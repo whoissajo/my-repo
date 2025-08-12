@@ -6,9 +6,7 @@ import random from "random";
 const path = "./data.json";
 
 const markCommit = (x, y) => {
-  const date = moment()
-    .subtract(1, "y")
-    .add(1, "d")
+  const date = moment("2025-01-01")
     .add(x, "w")
     .add(y, "d")
     .format();
@@ -23,17 +21,20 @@ const markCommit = (x, y) => {
 };
 
 const makeCommits = (n) => {
-  if(n===0) return simpleGit().push();
-  const x = random.int(0, 27);
-  const y = random.int(0, 6);
-  const date = moment().subtract(1, "y").add(1, "d").add(x, "w").add(y, "d").format();
+  if(n === 0) return simpleGit().push();
+  const x = random.int(0, 51); // 51 weeks in a year
+  const y = random.int(0, 6); // 6 days in a week
+  const date = moment("2025-01-01")
+    .add(x, "w")
+    .add(y, "d")
+    .format();
 
   const data = {
     date: date,
   };
   console.log(date);
   jsonfile.writeFile(path, data, () => {
-    simpleGit().add([path]).commit(date, { "--date": date },makeCommits.bind(this,--n));
+    simpleGit().add([path]).commit(date, { "--date": date }, makeCommits.bind(this, --n));
   });
 };
 
