@@ -22,9 +22,9 @@ const markCommit = (x, y) => {
 
 const makeCommits = (n) => {
   if(n === 0) return simpleGit().push();
-  const x = random.int(0, 51); // 51 weeks in a year
+  const x = random.int(0, 12); // 51 weeks in a year
   const y = random.int(0, 6); // 6 days in a week
-  const date = moment("2025-01-01")
+  const date = moment("2025-03-01")
     .add(x, "w")
     .add(y, "d")
     .format();
